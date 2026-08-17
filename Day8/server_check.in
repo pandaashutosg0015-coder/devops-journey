@@ -1,0 +1,23 @@
+#!/bin/bash
+
+# List of targets to check
+SERVERS="google.com github.com localhost"
+
+echo "=========================================="
+echo " Starting Automated Network Diagnostics "
+echo "=========================================="
+
+for SERVER in $SERVERS; do
+    echo "Checking connection to: $SERVER"
+    
+    # Send 1 ping packet with a 2-second timeout
+    if ping -c 1 -W 2 "$SERVER" > /dev/null 2>&1; then
+        echo "✅ $SERVER is ONLINE"
+    else
+        echo "❌ $SERVER is UNREACHABLE"
+    fi
+    
+    echo "------------------------------------------"
+done
+
+echo "Diagnostics complete."
